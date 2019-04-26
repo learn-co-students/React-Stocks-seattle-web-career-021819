@@ -1,32 +1,63 @@
 import React from 'react';
 
-const SearchBar = () => {
-  return (
-    <div>
+class SearchBar extends React.Component {
 
-      <strong>Sort by:</strong>
-      <label>
-        <input type="radio" value="Alphabetically" checked={null} onChange={null}/>
-        Alphabetically
-      </label>
-      <label>
-        <input type="radio" value="Price" checked={null} onChange={null}/>
-        Price
-      </label>
-      <br/>
+  constructor() {
+    super()
+    this.state = {
+      selected: null
+    }
+  }
 
-      <label>
-        <strong>Filter:</strong>
-        <select onChange={null}>
-          <option value="Tech">Tech</option>
-          <option value="Sportswear">Sportswear</option>
-          <option value="Finance">Finance</option>
-        </select>
-      </label>
+  handleAlphaChange(ev) {
+    this.props.sortAlpha();
+    this.setState({ selected: ev.target.value })
+  }
+
+  handlePriceChange(ev) {
+    this.props.sortPrice();
+    this.setState({ selected: ev.target.value })
+  }
+
+  render() {
+    return (
+      <div>
+
+        <strong>Sort by:</strong>
+        <label>
+          <input
+            type="radio"
+            value="Alphabetically"
+            checked={this.state.selected === 'Alphabetically' ? true : false}
+            onChange={(ev) => this.handleAlphaChange(ev)}
+          />
+          Alphabetically
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="Price"
+            checked={this.state.selected === 'Price' ? true : false}
+            onChange={(ev) => this.handlePriceChange(ev)}
+          />
+          Price
+        </label>
+        <br/>
+
+        <label>
+          <strong>Filter:</strong>
+          <select onChange={(ev) => this.props.filter(ev.target.value)}>
+            <option value="Tech">Tech</option>
+            <option value="Sportswear">Sportswear</option>
+            <option value="Finance">Finance</option>
+          </select>
+        </label>
 
 
-    </div>
-  );
+      </div>
+    );
+  }
+
 }
 
 
