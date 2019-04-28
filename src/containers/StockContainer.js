@@ -8,7 +8,9 @@ class StockContainer extends Component {
       <div>
         <h2>Stocks</h2>
         {
-          //render the list of stocks here
+          this.props.stockList.map(ss => {
+            return <Stock key={ss.id} stock={ss} onStockMethod={this.props.onStockBuy}/>
+          })
         }
       </div>
     );
