@@ -4,16 +4,16 @@ import Stock from '../components/Stock'
 class StockContainer extends Component {
 
   render() {
-    return (
-      <div>
-        <h2>Stocks</h2>
-        {
-          //render the list of stocks here
-        }
-      </div>
+  const {stocks, buyStock} = this.props
+  return (
+    <div>
+      <h2>Stocks</h2>
+      {stocks.map((stock, index) => {
+        return <Stock stock={stock} key={index} buyOrRemoveStock={buyStock} />
+      })}
+    </div>
     );
   }
-
 }
 
 export default StockContainer;
