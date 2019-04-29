@@ -1,32 +1,66 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-const SearchBar = () => {
-  return (
-    <div>
+class SearchBar extends Component {
 
-      <strong>Sort by:</strong>
-      <label>
-        <input type="radio" value="Alphabetically" checked={null} onChange={null}/>
-        Alphabetically
-      </label>
-      <label>
-        <input type="radio" value="Price" checked={null} onChange={null}/>
-        Price
-      </label>
-      <br/>
+  handleRadioChange = (ev) => {
+    if (ev.target.checked) {
 
-      <label>
-        <strong>Filter:</strong>
-        <select onChange={null}>
-          <option value="Tech">Tech</option>
-          <option value="Sportswear">Sportswear</option>
-          <option value="Finance">Finance</option>
-        </select>
-      </label>
+      if (ev.target.value === "Alphabetically") {
+        this.props.sortStocksByAlphabet()
+      }
+      else if (ev.target.value === "Price") {
+        this.props.sortStocksByPrice()
+      }
+
+    }
+  }
+
+  handleFilterChange = (ev) => {
+    this.props.filterByType(ev.target.value)
+  }
+
+  render() {
+    return (
+      <div>
+
+        <strong>Sort by:</strong>
+        <label>
+          <input
+            type="radio"
+            name="sort-by"
+            value="Alphabetically"
+            checked={null}
+            onChange={this.handleRadioChange}
+          />
+          Alphabetically
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="sort-by"
+            value="Price"
+            checked={null}
+            onChange={this.handleRadioChange}
+          />
+          Price
+        </label>
+        <br/>
+
+        <label>
+          <strong>Filter:</strong>
+          <select onChange={this.handleFilterChange}>
+            <option value="All">All Stocks</option>
+            <option value="Tech">Tech</option>
+            <option value="Sportswear">Sportswear</option>
+            <option value="Finance">Finance</option>
+          </select>
+        </label>
 
 
-    </div>
-  );
+      </div>
+    )
+  }
+
 }
 
 
